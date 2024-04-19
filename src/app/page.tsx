@@ -1,95 +1,76 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td, TableContainer,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+} from '@chakra-ui/react'
+import { Organization } from '@/utils/types'
+import { getOrganization } from '@/utils/api';
+import Link from 'next/link'
 
-export default function Home() {
+export default async () => {
+  const orgInfo: Organization = await getOrganization()
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <main>
+      <TableContainer>
+        <Table>
+          <Tbody>
+            <Tr>
+              <Td>ID</Td>
+              <Td>{orgInfo.organizationId}</Td>
+            </Tr>
+            <Tr>
+              <Td>이름</Td>
+              <Td>{orgInfo.name}</Td>
+            </Tr>
+            <Tr>
+              <Td>유형</Td>
+              <Td>{orgInfo.type}</Td>
+            </Tr>
+            <Tr>
+              <Td>백준 유저 수</Td>
+              <Td>{orgInfo.bojUserCount}</Td>
+            </Tr>
+            <Tr>
+              <Td>레이팅</Td>
+              <Td>{orgInfo.rating}</Td>
+            </Tr>
+            <Tr>
+              <Td>solved.ac 유저 수</Td>
+              <Td>{orgInfo.userCount}</Td>
+            </Tr>
+            <Tr>
+              <Td>투표 수</Td>
+              <Td>{orgInfo.voteCount}</Td>
+            </Tr>
+            <Tr>
+              <Td>푼 문제 수</Td>
+              <Td>{orgInfo.solvedCount}</Td>
+            </Tr>
+            <Tr>
+              <Td>색상</Td>
+              <Td>{orgInfo.color}</Td>
+            </Tr>
+          </Tbody>
+        </Table>
+      </TableContainer>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <UnorderedList>
+        <ListItem><Link href="/problems/solved">푼 문제</Link></ListItem>
+        <ListItem><Link href="/problems/unsolved">안 푼 문제</Link></ListItem>
+        <ListItem><Link href="/ranking/boj">백준 랭킹</Link></ListItem>
+        <ListItem><Link href="/ranking/solved">solved.ac 문제해결 랭킹</Link></ListItem>
+        <ListItem><Link href="/ranking/arena">solved.ac 아레나 랭킹</Link></ListItem>
+      </UnorderedList>
     </main>
   );
 }
