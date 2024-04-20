@@ -1,0 +1,37 @@
+.tier-master {
+    background-color: #b491ff;
+    background-image: linear-gradient(0deg, #ff7ca8, #b491ff, #7cf9ff);
+    -webkit-background-size: 80%;
+    background-size: 80%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.tier-ruby {
+    color: #ff0062;
+}
+
+.tier-diamond {
+    color: #00b4fc;
+}
+
+.tier-platinum {
+    color: #27e2a4;
+}
+
+.tier-gold {
+    color: #ec9a00;
+}
+
+.tier-silver {
+    color: #435f7a;
+}
+
+.tier-bronze {
+color: #ad5600;
+}
