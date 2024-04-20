@@ -17,8 +17,10 @@ export default async () => {
             <Tr>
               <Td>#</Td>
               <Td>핸들</Td>
-              <Td>소개</Td>
+              <Td display={{ base: 'none', md: 'table-cell' }}>소개</Td>
               <Td>AC 레이팅</Td>
+              <Td>푼 문제</Td>
+              <Td display={{ base: 'table-cell', md: 'none' }}>소개</Td>
             </Tr>
           </Thead>
           <Tbody>
@@ -43,8 +45,10 @@ export default async () => {
                       <Text _hover={{ textDecoration: 'underline' }} style={{ display: 'inline' }} fontWeight={700} >{user.handle}</Text>
                     </Link>
                   </Td>
-                  <Td>{user.bio}</Td>
+                  <Td display={{ base: 'none', md: 'table-cell' }}>{user.bio}</Td>
                   <Td><Text className={tierToClassName(user.tier)} color={tierToColor(user.tier)} fontWeight={800}>{user.rating}</Text></Td>
+                  <Td>{user.solvedCount.toLocaleString()}</Td>
+                  <Td display={{ base: 'table-cell', md: 'none' }}>{user.bio}</Td>
                 </Tr>
               )
             }
