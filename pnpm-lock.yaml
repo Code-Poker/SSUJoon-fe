@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@chakra-ui/icons':
+    specifier: ^2.1.1
+    version: 2.1.1(@chakra-ui/system@2.6.2)(react@18.2.0)
   '@chakra-ui/react':
     specifier: ^2.8.2
     version: 2.8.2(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.2.79)(framer-motion@11.1.7)(react-dom@18.2.0)(react@18.2.0)
@@ -26,6 +29,9 @@ dependencies:
   react-dom:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
+  react-icons:
+    specifier: ^5.1.0
+    version: 5.1.0(react@18.2.0)
 
 devDependencies:
   '@types/node':
@@ -364,6 +370,17 @@ packages:
       react: '>=18'
     dependencies:
       '@chakra-ui/shared-utils': 2.0.5
+      '@chakra-ui/system': 2.6.2(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
+  /@chakra-ui/icons@2.1.1(@chakra-ui/system@2.6.2)(react@18.2.0):
+    resolution: {integrity: sha512-3p30hdo4LlRZTT5CwoAJq3G9fHI0wDc0pBaMHj4SUn0yomO+RcDRlzhdXqdr5cVnzax44sqXJVnf3oQG0eI+4g==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/icon': 3.2.0(@chakra-ui/system@2.6.2)(react@18.2.0)
       '@chakra-ui/system': 2.6.2(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(react@18.2.0)
       react: 18.2.0
     dev: false
@@ -3486,6 +3503,14 @@ packages:
       react-clientside-effect: 1.2.6(react@18.2.0)
       use-callback-ref: 1.3.2(@types/react@18.2.79)(react@18.2.0)
       use-sidecar: 1.1.2(@types/react@18.2.79)(react@18.2.0)
+    dev: false
+
+  /react-icons@5.1.0(react@18.2.0):
+    resolution: {integrity: sha512-D3zug1270S4hbSlIRJ0CUS97QE1yNNKDjzQe3HqY0aefp2CBn9VgzgES27sRR2gOvFK+0CNx/BW0ggOESp6fqQ==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is@16.13.1:
