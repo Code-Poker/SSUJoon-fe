@@ -14,7 +14,7 @@ export default async () => {
       <TableContainer>
         <Table>
           <Thead>
-            <Tr>
+            <Tr fontWeight={700}>
               <Td>#</Td>
               <Td>핸들</Td>
               <Td display={{ base: 'none', md: 'table-cell' }}>소개</Td>
