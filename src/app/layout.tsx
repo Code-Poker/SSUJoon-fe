@@ -22,7 +22,7 @@ export default function RootLayout({
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode}></ColorModeScript>
         <Providers>
-          <Box minH='100vh'>
+          <Box minH='calc(100vh - 160px)'>
             <Navbar />
             <Box margin={6}>
               {children}
