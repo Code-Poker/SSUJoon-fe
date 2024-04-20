@@ -3,7 +3,7 @@ import { SolvedUser } from '@/utils/types'
 import { getSolvedRanking } from '@/utils/api';
 import Image from 'next/image'
 import './tier.css'
-import { tierToAltText, tierToClassName } from '@/utils/tier';
+import { tierToAltText, tierToColor, tierToClassName } from '@/utils/tier';
 
 export default async () => {
   const users: SolvedUser[] = await getSolvedRanking(1)
@@ -44,7 +44,7 @@ export default async () => {
                     </Link>
                   </Td>
                   <Td>{user.bio}</Td>
-                  <Td><Text className={tierToClassName(user.tier)} fontWeight={800}>{user.rating}</Text></Td>
+                  <Td><Text className={tierToClassName(user.tier)} color={tierToColor(user.tier)} fontWeight={800}>{user.rating}</Text></Td>
                 </Tr>
               )
             }
