@@ -13,8 +13,8 @@ export const Footer = () => {
       >
         This site is currently on alpha version. Some features can be removed or changed in the future.<br />
         <br />
-        'Baekjoon online judge' is a trademark of <Link href='https://startlink.io/'>Startlink</Link><br />
-        'solved.ac' is a trademark of <Link href='https://shiftpsh.com/'>shiftpsh.com</Link>
+        'Baekjoon online judge' is the trademark of <Link href='https://startlink.io/'>Startlink</Link><br />
+        'solved.ac' is the trademark of <Link href='https://shiftpsh.com/'>shiftpsh.com</Link>
       </Box>
     </footer>
   )
