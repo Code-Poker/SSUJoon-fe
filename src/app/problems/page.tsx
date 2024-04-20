@@ -1,6 +1,7 @@
-import { Table, Thead, Tbody, Tr, Td, TableContainer, Text } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tr, Td, TableContainer, Text, Link, Image } from '@chakra-ui/react'
 import { SolvedProblem } from '@/utils/types'
 import { getProblems } from '@/utils/api';
+import { tierToAltText } from '@/utils/tier';
 
 export default async () => {
 
@@ -22,8 +23,24 @@ export default async () => {
             {
               problems.map((prob) =>
                 <Tr>
-                  <Td>{prob.problemId}</Td>
-                  <Td>{prob.titleKo}</Td>
+                  <Td>
+                    <Link href={`https://www.acmicpc.net/problem/${prob.problemId}`} _hover={{ textDecoration: 'none' }}>
+                      <Image
+                        src={`/tier/${prob.level}.svg`}
+                        width={16}
+                        height={16}
+                        alt={tierToAltText(prob.level!)}
+                        style={{
+                          display: 'inline',
+                          width: '1.2em',
+                          height: '1.2em',
+                          verticalAlign: 'middle',
+                        }} />
+                      &nbsp;
+                      <Text _hover={{ textDecoration: 'underline' }} style={{ display: 'inline' }}>{prob.problemId}</Text>
+                    </Link>
+                  </Td>
+                  <Td><Link href={`https://www.acmicpc.net/problem/${prob.problemId}`}>{prob.titleKo}</Link></Td>
                   <Td>{prob.tags!.map((tag) => tag.key).join(', ')}</Td>
                 </Tr>
               )
