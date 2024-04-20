@@ -3,6 +3,8 @@
 import { chakra, Box, Flex, Collapse, Stack, Text, IconButton, useColorMode, useColorModeValue, Link, useDisclosure, useBreakpointValue } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
 // TODO: Create a type for navbar items
 // TODO: Support sub-menu
@@ -18,9 +20,10 @@ const NAVBAR_ITEMS = [
   }
 ]
 
-export const Navbar = chakra((props: { className?: string, active?: string}) => {
+export const Navbar = () => {
   const { toggleColorMode } = useColorMode()
   const { isOpen, onToggle } = useDisclosure()
+  const pathname = usePathname()
 
   return (
     <Box
@@ -69,7 +72,7 @@ export const Navbar = chakra((props: { className?: string, active?: string}) => 
             display={{ base: 'none', md: 'flex' }}
             ml={10}
           >
-            <NavbarDesktopItems active={props.active} />
+            <NavbarDesktopItems pathname={pathname} />
           </Flex>
         </Flex>
 
@@ -90,13 +93,13 @@ export const Navbar = chakra((props: { className?: string, active?: string}) => 
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <NavbarMobileItems active={props.active} />
+        <NavbarMobileItems pathname={pathname} />
       </Collapse>
     </Box>
   )
-})
+}
 
-const NavbarDesktopItems = ({ active }: { active?: string }) => {
+const NavbarDesktopItems = ({ pathname }: { pathname: string }) => {
   const linkColor = useColorModeValue('gray.600', 'gray.400')
   const linkHoverColor = useColorModeValue('gray.800', 'white')
 
@@ -112,8 +115,7 @@ const NavbarDesktopItems = ({ active }: { active?: string }) => {
           <Box
             p={2}
             fontSize='md'
-            fontWeight={active === navbarItem.text ? 700 : 500}
-            color={active === navbarItem.text ? linkHoverColor : linkColor}
+            color={pathname === navbarItem.href ? linkHoverColor : linkColor}
           >
             <Link
               href={navbarItem.href ?? '#'}
@@ -131,7 +133,7 @@ const NavbarDesktopItems = ({ active }: { active?: string }) => {
   )
 }
 
-const NavbarMobileItems = ({ active }: { active? :string }) => {
+const NavbarMobileItems = ({ pathname }: { pathname: string }) => {
   const linkColor = useColorModeValue('gray.600', 'gray.400')
   const linkHoverColor = useColorModeValue('gray.800', 'white')
 
@@ -146,8 +148,7 @@ const NavbarMobileItems = ({ active }: { active? :string }) => {
           py={2}
           justifyContent='space-between'
           alignItems='center'
-          fontWeight={active === navbarItem.text ? 700 : 500}
-          color={active === navbarItem.text ? linkHoverColor : linkColor}
+          color={pathname === navbarItem.href ? linkHoverColor : linkColor}
         >
           <Link
             href={navbarItem.href ?? '#'}
