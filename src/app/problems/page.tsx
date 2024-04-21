@@ -13,7 +13,9 @@ export default async ({ searchParams }: { searchParams: { [key: string]: string 
   const sortCriteria = searchParams['sortCriteria'] ? String(searchParams['sortCriteria']) : 'random'
   const orderBy = searchParams['orderBy'] ? String(searchParams['orderBy']) : 'asc'
 
-  const problems: SolvedProblem[] = await getProblems(solved, currentPage, sortCriteria, orderBy)
+  const problems = await getProblems(solved, currentPage, sortCriteria, orderBy)
+  const problemCount = problems.count
+  const problemItems = problems.items as SolvedProblem[]
 
   return (
     <>
@@ -30,7 +32,7 @@ export default async ({ searchParams }: { searchParams: { [key: string]: string 
           </Thead>
           <Tbody>
             {
-              problems.map((prob) =>
+              problemItems.map((prob) =>
                 <Tr>
                   <Td>
                     <Link href={`https://www.acmicpc.net/problem/${prob.problemId}`} _hover={{ textDecoration: 'none' }}>
@@ -65,7 +67,7 @@ export default async ({ searchParams }: { searchParams: { [key: string]: string 
           </Tbody>
         </Table>
       </TableContainer>
-      <Pagination url='/problems' currentPage={currentPage} maxPage={100} solved={solved} sortCriteria={sortCriteria} orderBy={orderBy} />
+      <Pagination url='/problems' currentPage={currentPage} maxPage={Math.floor(problemCount / 50) + (problemCount % 50 ? 1 : 0)} solved={solved} sortCriteria={sortCriteria} orderBy={orderBy} />
     </>
   )
 }

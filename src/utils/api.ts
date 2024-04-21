@@ -29,7 +29,7 @@ export const getSolvedRanking = async (page: number) => {
     throw new Error('failed to fetch data')
   }
 
-  return (await res.json())['items'] as SolvedUser[]
+  return await res.json()
 }
 
 export const getArenaRanking = async (page: number) => {
@@ -39,7 +39,7 @@ export const getArenaRanking = async (page: number) => {
     throw new Error('failed to fetch data')
   }
 
-  return (await res.json())['items'] as SolvedUser[]
+  return await res.json()
 }
 
 export const getProblems = async (isSolved: boolean, page: number, sortCriteria?: string, sortDirection?: string) => {
@@ -51,5 +51,5 @@ export const getProblems = async (isSolved: boolean, page: number, sortCriteria?
     throw new Error('failed to fetch data')
   }
 
-  return (await res.json())['items'] as SolvedProblem[]
+  return await res.json()
 }

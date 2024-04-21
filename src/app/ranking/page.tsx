@@ -8,7 +8,10 @@ import { Pagination } from '@/app/components/common/Pagination';
 
 export default async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
   const currentPage = searchParams['page'] ? Number(searchParams['page']) : 1
-  const users: SolvedUser[] = await getSolvedRanking(currentPage)
+
+  const solvedRanking = await getSolvedRanking(currentPage)
+  const userCount = solvedRanking.count
+  const userItems = solvedRanking.items as SolvedUser[] 
 
   return (
     <>
@@ -27,7 +30,7 @@ export default async ({ searchParams }: { searchParams: { [key: string]: string 
           </Thead>
           <Tbody>
             {
-              users.map((user, index) =>
+              userItems.map((user, index) =>
                 <Tr>
                   <Td>{(currentPage-1)*50 + index+1}</Td>
                   <Td>
@@ -58,7 +61,7 @@ export default async ({ searchParams }: { searchParams: { [key: string]: string 
         </Table>
       </TableContainer>
       
-      <Pagination url='/ranking' currentPage={currentPage} maxPage={100} />
+      <Pagination url='/ranking' currentPage={currentPage} maxPage={Math.floor(userCount / 50) + (userCount % 50 ? 1 : 0)} />
     </>
   )
 }
