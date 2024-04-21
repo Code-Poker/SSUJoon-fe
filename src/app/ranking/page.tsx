@@ -29,7 +29,7 @@ export default async ({ searchParams }: { searchParams: { [key: string]: string 
             {
               users.map((user, index) =>
                 <Tr>
-                  <Td>{index+1}</Td>
+                  <Td>{(currentPage-1)*50 + index+1}</Td>
                   <Td>
                     <Link href={`https://solved.ac/profile/${user.handle}`} _hover={{ textDecoration: 'none' }}>
                       <Image
