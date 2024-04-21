@@ -1,16 +1,17 @@
-import { Table, Thead, Tbody, Tr, Td, TableContainer, Text, Link, Image } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tr, Td, TableContainer, Text, Link, Image, Heading } from '@chakra-ui/react'
 import { SolvedProblem } from '@/utils/types'
 import { getProblems } from '@/utils/api';
 import { tierToAltText } from '@/utils/tier';
+import { Pagination } from '../components/common/Pagination';
 
-export default async () => {
-
-  const problems: SolvedProblem[] = await getProblems(false, 1, 'id', 'asc')
+export default async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
+  const currentPage = searchParams['page'] ? Number(searchParams['page']) : 1
+  const problems: SolvedProblem[] = await getProblems(false, currentPage, 'id', 'asc')
 
   return (
     <>
-      <Text>숭실대학교에서 아직 풀지 않은 문제</Text><br />
-      <TableContainer>
+      <Heading pb={8}>문제</Heading>
+      <TableContainer pb={8}>
         <Table>
           <Thead>
             <Tr fontWeight={700}>
@@ -48,6 +49,8 @@ export default async () => {
           </Tbody>
         </Table>
       </TableContainer>
+
+      <Pagination url='/problems' currentPage={currentPage} maxPage={100} />
     </>
   )
 }

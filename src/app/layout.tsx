@@ -24,7 +24,7 @@ export default function RootLayout({
         <Providers>
           <Box minH='100dvh'>
           <Navbar />
-            <Container maxW='container.xl'>
+            <Container maxW='container.xl' py={8}>
               {children}
             </Container>
           </Box>

@@ -23,7 +23,7 @@ export const getBojRanking = async (page: number) => {
 }
 
 export const getSolvedRanking = async (page: number) => {
-  const res = await fetch(`${process.env.API_URL}/ranking/solved`)
+  const res = await fetch(`${process.env.API_URL}/ranking/solved?page=${page}`)
 
   if(!res.ok) {
     throw new Error('failed to fetch data')
@@ -33,7 +33,7 @@ export const getSolvedRanking = async (page: number) => {
 }
 
 export const getArenaRanking = async (page: number) => {
-  const res = await fetch(`${process.env.API_URL}/ranking/arena`)
+  const res = await fetch(`${process.env.API_URL}/ranking/arena?page=${page}`)
 
   if(!res.ok) {
     throw new Error('failed to fetch data')

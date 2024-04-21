@@ -1,17 +1,19 @@
-import { Table, Thead, Tbody, Tr, Td, TableContainer, Text, Link } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tr, Td, TableContainer, Text, Link, Heading } from '@chakra-ui/react'
 import { SolvedUser } from '@/utils/types'
 import { getSolvedRanking } from '@/utils/api';
 import Image from 'next/image'
 import './tier.css'
 import { tierToAltText, tierToColor, tierToClassName } from '@/utils/tier';
+import { Pagination } from '@/app/components/common/Pagination';
 
-export default async () => {
-  const users: SolvedUser[] = await getSolvedRanking(1)
+export default async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
+  const currentPage = searchParams['page'] ? Number(searchParams['page']) : 1
+  const users: SolvedUser[] = await getSolvedRanking(currentPage)
 
   return (
     <>
-      <Text>숭실대학교의 solved.ac 문제해결 랭킹</Text><br />
-      <TableContainer>
+      <Heading pb={8}>랭킹</Heading>
+      <TableContainer pb={8}>
         <Table>
           <Thead>
             <Tr fontWeight={700}>
@@ -55,6 +57,8 @@ export default async () => {
           </Tbody>
         </Table>
       </TableContainer>
+      
+      <Pagination url='/ranking' currentPage={currentPage} maxPage={100} />
     </>
   )
 }
