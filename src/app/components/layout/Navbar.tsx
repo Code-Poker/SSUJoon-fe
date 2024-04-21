@@ -1,6 +1,6 @@
 'use client'
 
-import { chakra, Box, Flex, Collapse, Stack, Text, IconButton, useColorMode, useColorModeValue, Link, useDisclosure, useBreakpointValue } from '@chakra-ui/react'
+import { Container, Box, Flex, Collapse, Stack, Text, IconButton, useColorMode, useColorModeValue, Link, useDisclosure, useBreakpointValue } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import { usePathname } from 'next/navigation';
@@ -33,68 +33,70 @@ export const Navbar = () => {
       borderBottom='1px'
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
     >
-      <Flex
-        margin='auto'
-        minH='60px'
-        align='center'
-      >
+      <Container maxW='container.xl'>
         <Flex
-          flex={{ base: 1, md: 'auto'}}
-          ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none '}}
+          margin='auto'
+          minH='60px'
+          align='center'
         >
-          <IconButton
-            onClick={onToggle}
-            icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-            variant='ghost'
-            aria-label='Toggle menu'
-          />
-        </Flex>
-        <Flex
-          flex={{ base: 1 }}
-          justify={{ base: 'center', md: 'start' }}
-        >
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            color={useColorModeValue('gray.800', 'white')}
-            fontWeight={700}
-            my='auto'
-            cursor='pointer'
-          >
-            <Link
-              href='/'
-              _hover={{
-                textDecoration: 'none',
-              }}>SSUJoon</Link>
-          </Text>
-
           <Flex
-            display={{ base: 'none', md: 'flex' }}
-            ml={10}
+            flex={{ base: 1, md: 'auto'}}
+            ml={{ base: -2 }}
+            display={{ base: 'flex', md: 'none '}}
           >
-            <NavbarDesktopItems pathname={pathname} />
+            <IconButton
+              onClick={onToggle}
+              icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
+              variant='ghost'
+              aria-label='Toggle menu'
+            />
           </Flex>
+          <Flex
+            flex={{ base: 1 }}
+            justify={{ base: 'center', md: 'start' }}
+          >
+            <Text
+              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+              color={useColorModeValue('gray.800', 'white')}
+              fontWeight={700}
+              my='auto'
+              cursor='pointer'
+            >
+              <Link
+                href='/'
+                _hover={{
+                  textDecoration: 'none',
+                }}>SSUJoon</Link>
+            </Text>
+
+            <Flex
+              display={{ base: 'none', md: 'flex' }}
+              ml={10}
+            >
+              <NavbarDesktopItems pathname={pathname} />
+            </Flex>
+          </Flex>
+
+          <Stack
+            flex={{ base: 1, md: 0}}
+            justify='flex-end'
+            direction='row'
+            spacing={6}
+          >
+            <IconButton
+              fontSize='md'
+              aria-label='Toggle color mode'
+              icon={useColorModeValue(<MoonIcon />, <SunIcon />)}
+              variant='link'
+              onClick={toggleColorMode}
+            />
+          </Stack>
         </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0}}
-          justify='flex-end'
-          direction='row'
-          spacing={6}
-        >
-          <IconButton
-            fontSize='md'
-            aria-label='Toggle color mode'
-            icon={useColorModeValue(<MoonIcon />, <SunIcon />)}
-            variant='link'
-            onClick={toggleColorMode}
-          />
-        </Stack>
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-        <NavbarMobileItems pathname={pathname} />
-      </Collapse>
+        <Collapse in={isOpen} animateOpacity>
+          <NavbarMobileItems pathname={pathname} />
+        </Collapse>
+      </Container>
     </Box>
   )
 }

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { Providers } from '@/app/providers'
-import { ColorModeScript, Box } from '@chakra-ui/react'
+import { ColorModeScript, Box, Container } from '@chakra-ui/react'
 import theme from '@/utils/theme'
-import { Navbar } from '@/app/components/Navbar';
-import { Footer } from '@/app/components/Footer';
+import { Navbar } from '@/app/components/layout/Navbar';
+import { Footer } from '@/app/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'SSUJoon',
@@ -22,11 +22,11 @@ export default function RootLayout({
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode}></ColorModeScript>
         <Providers>
-          <Box minH='calc(100vh - 160px)'>
-            <Navbar />
-            <Box margin={6}>
+          <Box minH='100dvh'>
+          <Navbar />
+            <Container maxW='container.xl'>
               {children}
-            </Box>
+            </Container>
           </Box>
           <Footer />
         </Providers>
