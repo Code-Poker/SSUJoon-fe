@@ -4,7 +4,7 @@ import { Button, Center } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { useColorModeValue } from '@chakra-ui/react'
 
-export const Pagination = ({ url, currentPage, maxPage }: { url: string, currentPage: number, maxPage: number }) => {
+export const Pagination = ({ url, currentPage, maxPage, solved, sortCriteria, orderBy }: { url: string, currentPage: number, maxPage: number, solved: boolean, sortCriteria: string, orderBy: string }) => {
   const router = useRouter()
   const pages = new Set<number>()
   const buttonColor = useColorModeValue('gray.100', 'gray.700')
@@ -19,9 +19,9 @@ export const Pagination = ({ url, currentPage, maxPage }: { url: string, current
 
   return (
     <>
-      <Center>
+      <Center pt={8}>
         {Array.from(pages).map((page) => (
-          <Button backgroundColor={page === currentPage ? selectedButtonColor : buttonColor} ml={1} mr={1} onClick={() => router.push(`${url}?page=${page}`)}>{page}</Button>
+          <Button backgroundColor={page === currentPage ? selectedButtonColor : buttonColor} ml={1} mr={1} onClick={() => router.push(`${url}?page=${page}&solved=${solved}&sortCriteria=${sortCriteria}&orderBy=${orderBy}`)}>{page}</Button>
         ))}
       </Center>
     </>

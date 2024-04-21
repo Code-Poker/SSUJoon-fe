@@ -1,17 +1,25 @@
-import { Table, Thead, Tbody, Tr, Td, TableContainer, Text, Link, Image, Heading } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tr, Td, TableContainer, Text, Link, Image, Heading, HStack, Tag, TagLabel } from '@chakra-ui/react'
 import { SolvedProblem } from '@/utils/types'
 import { getProblems } from '@/utils/api';
 import { tierToAltText } from '@/utils/tier';
-import { Pagination } from '../components/common/Pagination';
+import { Pagination } from '@/app/components/common/Pagination';
+import { SearchFilter } from '@/app/components/common/SearchFilter';
+
+// TODO: error handling on unexpected params
 
 export default async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
   const currentPage = searchParams['page'] ? Number(searchParams['page']) : 1
-  const problems: SolvedProblem[] = await getProblems(false, currentPage, 'id', 'asc')
+  const solved = searchParams['solved'] === 'true' ? true : false
+  const sortCriteria = searchParams['sortCriteria'] ? String(searchParams['sortCriteria']) : 'random'
+  const orderBy = searchParams['orderBy'] ? String(searchParams['orderBy']) : 'asc'
+
+  const problems: SolvedProblem[] = await getProblems(solved, currentPage, sortCriteria, orderBy)
 
   return (
     <>
       <Heading pb={8}>문제</Heading>
-      <TableContainer pb={8}>
+      <SearchFilter url='/problems' page={currentPage} solved={solved} sortCriteria={sortCriteria} orderBy={orderBy} />
+      <TableContainer>
         <Table>
           <Thead>
             <Tr fontWeight={700}>
@@ -42,15 +50,22 @@ export default async ({ searchParams }: { searchParams: { [key: string]: string 
                     </Link>
                   </Td>
                   <Td><Link href={`https://www.acmicpc.net/problem/${prob.problemId}`}>{prob.titleKo}</Link></Td>
-                  <Td>{prob.tags!.map((tag) => tag.key).join(', ')}</Td>
+                  <Td>
+                    {prob.tags!.map((tag) =>
+                      <HStack spacing={4} style={{ display: 'inline' }} overflowWrap='break-word'>
+                        <Tag size='md' key='md' variant='subtle' ml={1} mr={1}>
+                          <TagLabel>{tag.key}</TagLabel>
+                        </Tag>
+                      </HStack>
+                    )}
+                  </Td>
                 </Tr>
               )
             }
           </Tbody>
         </Table>
       </TableContainer>
-
-      <Pagination url='/problems' currentPage={currentPage} maxPage={100} />
+      <Pagination url='/problems' currentPage={currentPage} maxPage={100} solved={solved} sortCriteria={sortCriteria} orderBy={orderBy} />
     </>
   )
 }
