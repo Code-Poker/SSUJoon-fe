@@ -78,7 +78,7 @@ export const Navbar = () => {
           </Flex>
 
           <Stack
-            flex={{ base: 1, md: 0}}
+            flex={{ base: 1, md: 0 }}
             justify='flex-end'
             direction='row'
             spacing={6}
