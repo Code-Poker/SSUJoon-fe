@@ -5,6 +5,12 @@ const config: ThemeConfig = {
   useSystemColorMode: true,
 }
 
-const theme = extendTheme({ config })
+const theme = extendTheme({
+  config: config,
+  fonts: {
+    heading: `'Pretendard', sans-serif`,
+    body: `'Pretendard', sans-serif`,
+  }
+})
 
 export default theme

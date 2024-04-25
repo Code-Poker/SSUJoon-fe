@@ -4,6 +4,7 @@ import { ColorModeScript, Box, Container } from '@chakra-ui/react'
 import theme from '@/utils/theme'
 import { Navbar } from '@/app/components/layout/Navbar';
 import { Footer } from '@/app/components/layout/Footer';
+import Fonts from '@/utils/font';
 
 export const metadata: Metadata = {
   title: 'SSUJoon',
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode}></ColorModeScript>
+        <Fonts />
         <Providers>
           <Box minH='100dvh'>
           <Navbar />
